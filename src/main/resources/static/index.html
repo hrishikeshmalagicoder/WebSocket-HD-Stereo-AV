@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>WebRTC 1:1 Video Chat</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        video {
+            width: 320px;
+            height: 240px;
+            background: black;
+            margin: 10px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .controls {
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 10px 18px;
+            font-size: 15px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #1976d2;
+            color: white;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        button.reset {
+            background: #d32f2f;
+        }
+
+        button.reset:hover {
+            background: #9a0007;
+        }
+    </style>
+</head>
+<body>
+
+<h2>WebRTC 1:1 Video Chat</h2>
+
+<div class="controls">
+    <button onclick="startCaller()">Start Caller</button>
+    <button onclick="startReceiver()">Start Receiver</button>
+    <button class="reset" onclick="resetCall()">Reset</button>
+</div>
+
+<div>
+    <video id="localVideo" autoplay muted playsinline></video>
+    <video id="remoteVideo" autoplay playsinline></video>
+</div>
+
+<script src="websocket-streaming.js"></script>
+</body>
+</html>

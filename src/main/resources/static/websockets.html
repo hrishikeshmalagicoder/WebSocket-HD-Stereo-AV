@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebSocket HD Stereo AV</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Background gradient inspired by Jai Khachedu */
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1e1f2f, #3b3c5a);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+      color: #ffcc00; /* Vibrant yellow accent */
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    #role {
+      font-weight: bold;
+      color: #00ffcc;
+      text-shadow: 1px 1px 2px #000;
+      margin-bottom: 20px;
+    }
+
+    video, canvas {
+      border: 3px solid #ffcc00;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.6);
+      max-width: 100%;
+      height: auto;
+      background: #111;
+    }
+
+    button {
+      font-weight: bold;
+      color: #111;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+    }
+
+    .btn-init { background-color: #ffcc00; }  /* Yellow */
+    .btn-recv { background-color: #00ffcc; }  /* Teal */
+    .btn-init:hover { background-color: #e6b800; }
+    .btn-recv:hover { background-color: #00d9b3; }
+
+    h5 { color: #fff; text-shadow: 1px 1px 3px #000; }
+
+    .container {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    @media (max-width: 767px) {
+      video, canvas {
+        border-width: 2px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container text-center">
+  <h2 class="mb-4">WebSocket HD Stereo AV</h2>
+
+  <div class="mb-3">
+    <button class="btn btn-init" onclick="connectAsInitiator()">Connect as Initiator</button>
+    <button class="btn btn-recv" onclick="connectAsReceiver()">Connect as Receiver</button>
+  </div>
+
+  <div id="role">Role: Not connected</div>
+
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-6 mb-3">
+      <h5>Local Video</h5>
+      <video id="localVideo" autoplay playsinline muted class="w-100"></video>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <h5>Remote Video</h5>
+      <canvas id="remoteCanvas" width="640" height="480" class="w-100"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- App JS -->
+<script src="websocket-streaming.js"></script>
+
+<script>
+  function connectAsInitiator() {
+    document.getElementById("role").innerText = "Role: Initiator";
+    window.APP_ROLE = "INITIATOR";
+    start();
+  }
+
+  function connectAsReceiver() {
+    document.getElementById("role").innerText = "Role: Receiver";
+    window.APP_ROLE = "RECEIVER";
+    start();
+  }
+</script>
+
+</body>
+</html>

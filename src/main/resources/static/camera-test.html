@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mobile Camera Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        video {
+            width: 90%;
+            max-width: 400px;
+            height: auto;
+            background: black;
+            margin: 20px 0;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Mobile Camera Test</h1>
+<p>Click the button below to check if your camera & microphone work.</p>
+<button onclick="startCamera()">Start Camera</button>
+
+<video id="localVideo" autoplay muted playsinline></video>
+
+<script>
+    async function startCamera() {
+        const videoEl = document.getElementById("localVideo");
+
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            });
+
+            videoEl.srcObject = stream;
+            console.log("Camera and mic access granted", stream);
+            alert("Camera and microphone access granted ✅");
+
+        } catch (err) {
+            console.error("Failed to access camera/mic", err);
+            alert("Failed to access camera or microphone ❌\n" + err.message);
+        }
+    }
+</script>
+</body>
+</html>
